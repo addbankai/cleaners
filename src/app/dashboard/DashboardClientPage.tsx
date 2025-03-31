@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link'; // Import Link
+// import Link from 'next/link'; // Removed unused import
 import { useWallet } from '@/context/WalletContext';
 import { useRouter } from 'next/navigation'; // Import useRouter
-import { Assets, UTxO, C } from 'lucid-cardano';
+import { UTxO } from 'lucid-cardano'; // Removed unused Assets, C
 
 // --- Helper Functions ---
+// Removed unused hexToString function
+/*
 const hexToString = (hex: string): string | null => {
   try {
     // Ensure hex is a non-empty string with even length
@@ -23,12 +25,18 @@ const hexToString = (hex: string): string | null => {
     return null;
   }
 };
-const ipfsToHttp = (ipfsUrl: string): string => {
+*/
+// Removed unused ipfsToHttp function
+/*
+const ipfsToHttp = (ipfsUrl: string): string => { // Keep ipfsToHttp if needed elsewhere, otherwise remove
   // Ensure ipfsUrl is a string before calling methods
   if (typeof ipfsUrl !== 'string' || !ipfsUrl.startsWith('ipfs://')) return ipfsUrl || '';
   const cid = ipfsUrl.substring(7); // .substring is correct for string
   return `https://ipfs.io/ipfs/${cid}`;
 };
+*/
+// Removed unused processImageUrl function
+/*
 const processImageUrl = (imageData: any): string | null => {
   if (!imageData) return null;
   let url: string | null = null;
@@ -41,16 +49,22 @@ const processImageUrl = (imageData: any): string | null => {
   // Ensure url is a string before passing to ipfsToHttp
   return url ? ipfsToHttp(url) : null;
 };
+*/
+// */ // Removed orphaned comment marker
 
 // --- Component ---
 
+// Removed unused NftInfo interface
+/*
 interface NftInfo {
   unit: string;
   name: string | null;
   imageUrl: string | null;
 }
+*/
 
-type InventoryTab = "Slithermon" | "Items";
+// Removed unused InventoryTab type
+// type InventoryTab = "Slithermon" | "Items";
 
 export default function DashboardClientPage() {
   const { lucid, isConnected, isLoading: walletLoading, address, error: walletError, disconnectWallet } = useWallet(); // Add disconnectWallet
@@ -59,8 +73,8 @@ export default function DashboardClientPage() {
   // Balances State
   const [adaBalance, setAdaBalance] = useState<bigint | null>(null);
   const [snekBalance, setSnekBalance] = useState<bigint | null>(null);
-  const [balanceLoading, setBalanceLoading] = useState<boolean>(false);
-  const [balanceError, setBalanceError] = useState<string | null>(null);
+  // const [balanceLoading, setBalanceLoading] = useState<boolean>(false); // Removed unused state again
+  // const [balanceError, setBalanceError] = useState<string | null>(null); // Keep balanceError commented for now
 
   // NFT State REMOVED
 
@@ -70,7 +84,7 @@ export default function DashboardClientPage() {
   const SNEK_UNIT = "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f534e454b";
   // SLITHERMON_POLICY_ID REMOVED
   // ITEM_POLICY_ID REMOVED
-  const BLOCKFROST_API_KEY = process.env.NEXT_PUBLIC_BLOCKFROST_API_KEY; // Keep API key if needed elsewhere, or remove if only for NFTs
+  // const BLOCKFROST_API_KEY = process.env.NEXT_PUBLIC_BLOCKFROST_API_KEY; // Removed unused constant
 
   // Effect to fetch balance data ONLY
   useEffect(() => {
@@ -78,12 +92,12 @@ export default function DashboardClientPage() {
       // Check only for necessary connection details for balance fetching
       if (!isConnected || !lucid || !address) {
         setAdaBalance(null); setSnekBalance(null);
-        setBalanceLoading(false);
+        // setBalanceLoading(false); // Remove call as state is removed
         return; // Exit if not connected or ready
       }
 
-      setBalanceLoading(true);
-      setBalanceError(null);
+      // setBalanceLoading(true); // Removed unused state setter
+      // setBalanceError(null); // Removed unused state setter
       setAdaBalance(null); setSnekBalance(null);
       // NFT State updates REMOVED
 
@@ -113,12 +127,12 @@ export default function DashboardClientPage() {
 
       } catch (err: unknown) {
         console.error("Error fetching wallet balance data:", err);
-        const errorMessage = err instanceof Error ? err.message : String(err);
-        setBalanceError(`Fetch error: ${errorMessage}`);
+        // const errorMessage = err instanceof Error ? err.message : String(err); // Error message construction removed as balanceError is removed
+        // setBalanceError(`Fetch error: ${errorMessage}`); // Keep balanceError commented
         setAdaBalance(null); setSnekBalance(null);
         // NFT State updates REMOVED
       } finally {
-        setBalanceLoading(false);
+        // setBalanceLoading(false); // Remove call as state is removed
         // NFT State updates REMOVED
       }
     };

@@ -70,9 +70,9 @@ const WhitepaperPage = () => {
           </ul>
         </section>
 
-        {/* --- I. Original Gameplay Concept: "Venom Chronicles" --- */}
+        {/* --- I. Original Gameplay Concept: &quot;Venom Chronicles&quot; --- */}
         <section id="original-concept">
-          <h2>I. Original Gameplay Concept: "Venom Chronicles"</h2>
+          <h2>I. Original Gameplay Concept: &quot;Venom Chronicles&quot;</h2>
 
           <section id="original-concept-game">
             <h3>A. Game Concept</h3>
@@ -122,9 +122,9 @@ const WhitepaperPage = () => {
           </section>
         </section>
 
-        {/* --- II. New Gameplay Concept: "Slithermon Saga" --- */}
+        {/* --- II. New Gameplay Concept: &quot;Slithermon Saga&quot; --- */}
         <section id="new-concept">
-          <h2>II. New Gameplay Concept: "Slithermon Saga"</h2>
+          <h2>II. New Gameplay Concept: &quot;Slithermon Saga&quot;</h2>
 
           <section id="new-concept-game">
             <h3>A. Game Concept</h3>

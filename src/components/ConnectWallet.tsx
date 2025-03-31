@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react'; // Added useEffect import
+import React, { useState } from 'react'; // Removed unused useEffect import
 import { useWallet } from '@/context/WalletContext'; // Adjust path if needed
 
 export const ConnectWallet = () => {

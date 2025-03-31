@@ -22,9 +22,10 @@ interface CustomizedLabelProps {
   innerRadius: number;
   outerRadius: number;
   percent: number; // Explicitly number
-  index: number;
+  // index: number; // Removed unused index
 }
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }: CustomizedLabelProps) => {
+// Removed unused index parameter from destructuring
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: Omit<CustomizedLabelProps, 'index'>) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   // Revert to standard Math
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -38,9 +39,29 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
-const CustomTooltip = ({ active, payload }: any) => {
+// Define a more specific type for the tooltip payload
+// Define a more specific type for the tooltip payload
+interface OriginalDataPoint { // Define the shape of the original data
+  name: string;
+  value: number;
+  description: string;
+}
+
+interface TooltipPayload {
+  name: string;
+  value: number;
+  payload: OriginalDataPoint; // Use the specific type for the payload
+}
+
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: TooltipPayload[];
+}
+
+const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
-    const dataPoint = data.find(d => d.name === payload[0].name);
+    // Use optional chaining for safer access
+    const dataPoint = data.find(d => d.name === payload[0]?.name);
     return (
       <div className="custom-tooltip">
         <p className="label">{`${payload[0].name} : ${payload[0].value}%`}</p>
@@ -85,8 +106,8 @@ const TokenomicsSection: React.FC = () => {
                 verticalAlign="middle"
                 iconType="circle"
                 wrapperStyle={{ paddingLeft: '20px' }}
-                 // Add explicit types for formatter parameters
-                formatter={(value: string, entry: any) => <span style={{ color: '#e5e7eb' }}>{value}</span>}
+                 // Removed unused 'entry' parameter and typed 'value'
+                formatter={(value: string) => <span style={{ color: '#e5e7eb' }}>{value}</span>}
               />
             </PieChart>
           </ResponsiveContainer>

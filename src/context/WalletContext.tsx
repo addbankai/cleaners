@@ -155,6 +155,19 @@ export const useWallet = (): WalletState => {
   return context;
 };
 
+// Define a more specific type for the Cardano wallet API structure based on CIP-0030
+interface CardanoWalletApi {
+  enable: () => Promise<WalletApi>;
+  apiVersion: string;
+  name: string;
+  icon: string;
+  // isEnabled?: () => Promise<boolean>; // Optional method
+}
+
 declare global {
-  interface Window { cardano?: any; }
+  interface Window {
+    cardano?: {
+      [key: string]: CardanoWalletApi | undefined; // Use a mapped type
+    };
+  }
 }
