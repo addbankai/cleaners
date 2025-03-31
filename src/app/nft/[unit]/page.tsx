@@ -1,6 +1,6 @@
 import React from 'react';
-import NftDetailClient from './NftDetailClient'; // Import the Client Component
-import { C } from 'lucid-cardano'; // Import C for hexToString helper
+// import NftDetailClient from './NftDetailClient'; // Import the Client Component
+// import { C } from 'lucid-cardano'; // Import C for hexToString helper
 
 // --- Helper Functions ---
 const hexToString = (hex: string): string | null => {
@@ -116,17 +116,27 @@ async function getNftDetails(unit: string) {
 // --- Page Component (Server Component) ---
 interface NftDetailPageProps {
   params: { unit: string };
+  searchParams?: { [key: string]: string | string[] | undefined }; // Make searchParams optional
 }
 
-export default async function NftDetailPage({ params }: NftDetailPageProps) {
-  let nftData = null;
-  let error = null;
+export default async function NftDetailPage({ params }: NftDetailPageProps) { // Remove searchParams destructuring
+  // let nftData = null; // Commented out
+  let error = null; // Keep error handling for now
   try {
-    nftData = await getNftDetails(params.unit);
+    // nftData = await getNftDetails(params.unit); // Commented out data fetching
   } catch (e) {
-    error = e instanceof Error ? e.message : "An unknown error occurred.";
-    console.error(`NFT Detail Page Server Component: Error fetching data for ${params.unit}`, error);
+    error = e instanceof Error ? e.message : "An unknown error occurred."; // Keep error handling
+    console.error(`NFT Detail Page Server Component: Error fetching data for ${params.unit}`, error); // Keep error logging
   }
 
-  return <NftDetailClient nftData={nftData} error={error} />;
+  // return <NftDetailClient nftData={nftData} error={error} />; // Commented out client component return
+
+  // Add simplified return statement
+  return (
+    <div>
+      <h1>NFT Detail Page (Simplified)</h1>
+      <p>Unit: {params.unit}</p>
+      {error && <p>Error: {error}</p>}
+    </div>
+  );
 }
