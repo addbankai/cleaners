@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export', // Enable static export
-  // basePath: '/cleaners', // Removed basePath
+  basePath: '/cleaners', // Re-add basePath
   // assetPrefix: '/cleaners', // Keep assetPrefix removed
   /* config options here */
   images: {
