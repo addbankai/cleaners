@@ -73,8 +73,10 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
-        # Ensure NEXT_PUBLIC_BLOCKFROST_API_KEY is set as a repository secret if needed during build
         env:
+          # Skip installing sharp during build, as it's not needed for static export with unoptimized images
+          NEXT_SHARP_INSTALL_DISABLED: 1
+          # Ensure NEXT_PUBLIC_BLOCKFROST_API_KEY is set as a repository secret if needed during build
           NEXT_PUBLIC_BLOCKFROST_API_KEY: ${{ secrets.NEXT_PUBLIC_BLOCKFROST_API_KEY }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
