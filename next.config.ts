@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'export', // Enable static export
   basePath: '/cleaners', // Re-add basePath
+  trailingSlash: true, // Add trailing slash
   // assetPrefix: '/cleaners', // Keep assetPrefix removed
   /* config options here */
   images: {
