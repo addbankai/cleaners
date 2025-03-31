@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'export', // Enable static export
   basePath: '/cleaners', // Set base path for GitHub Pages
+  assetPrefix: '/cleaners', // Explicitly set asset prefix
   /* config options here */
   images: {
     unoptimized: true, // Disable image optimization for static export
